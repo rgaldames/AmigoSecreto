@@ -4,7 +4,8 @@
 let arrayAmigoSecreto=[];
 //================== Referencias al DOM ==================
 const inputAmigo = document.getElementById('txt-amigo');        // input de texto
-
+const inputlistaAmigos = document.getElementById('listaAmigos')
+const inputresultado = document.getElementById('resultado')
 
 function agregarAmigo(){
     const valor = (inputAmigo.value || '').trim();
@@ -14,9 +15,18 @@ function agregarAmigo(){
         return;
     }
     arrayAmigoSecreto.push(valor);
+
+    const li = document.createElement('li');
+    li.textContent = `${arrayAmigoSecreto.length}. ${valor}`;
+    inputlistaAmigos.appendChild(li);
+
+    inputresultado.innerHTML = ''; // Limpiar la lista de resultados
+
     inputAmigo.focus();
     inputAmigo.select();
 }
+
+
 
 function sortearAmigo(){
     
@@ -26,13 +36,20 @@ function sortearAmigo(){
     }
 
     const i = Math.floor(Math.random() * arrayAmigoSecreto.length);
-    const amigo = arrayAmigoSecreto[i];
-    alert(`El amigo secreto es: ${amigo}`);
-    
+    const amigo = "Amigo Secreto Seleccionado: " + arrayAmigoSecreto[i];
+    //alert(`El amigo secreto es: ${amigo}`);
+
+    const li = document.createElement('li');
+    li.textContent = `${arrayAmigoSecreto.length}. ${amigo}`;
+    inputresultado.appendChild(li);
+   
 
     for(let i=0; i<arrayAmigoSecreto.length; i++){
         console.log(arrayAmigoSecreto[i]);
     }
 
-    
+
+    arrayAmigoSecreto.length=0;
+    inputlistaAmigos.innerHTML = ''; // Limpiar la lista de amigos
+
 }
